@@ -4,7 +4,7 @@ require './meu-corpus.rb'
 
 puts "文章を入力するめう"
 #text = gets()
-text = "自転車で行きます"
+text = "自転車で行きます!!"
 text = change_to_meu_with_natto(text)
 text = changeToMeu(text)
 

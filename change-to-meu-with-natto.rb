@@ -18,7 +18,7 @@ def change_to_meu_with_natto( text )
   end
 
   # 動詞、助動詞の並びなら、動詞めうに変換
-  surface.each_with_index do |word, num|
+  for num in 1..surface.size-1
     # 変換後に助動詞が続く場合は無視
     if isIgnore == true && feature[num].split(",")[0] == '助動詞'
       surface.delete_at[surface.size-1]
@@ -41,20 +41,20 @@ def change_to_meu_with_natto( text )
 
       # 語句の書き換え
       surface[num-1] = feature[num-1].split(",")[6] #動詞を基本形に
-      surface << 'め'
-      surface << 'う'
+      surface[num] = 'め'
+      surface.insert(num+1,  'う')
     end
   end
 
   puts surface[surface.size]
 
-  # 最後がめうでない場合はめうを挿入
-  if feature[feature.size-1].split(",")[0] == '記号'
+  #最後がめうでない場合はめうを挿入
+  if feature[feature.size-1].split(",")[0] == '記号' || surface[surface.size-1] == '!' || surface[surface.size-1] == '!!'
     if !( surface[surface.size-3] == 'め' && surface[surface.size-2] == 'う')
       tmp = surface[surface.size-1]
       surface[surface.size-1] = 'め'
-      surface[surface.size] = 'う'
-      surface[surface.size+1] = tmp
+      surface << 'う'
+      surface << tmp
     end
   elsif !( surface[surface.size-2] == 'め' && surface[surface.size-1] == 'う' )
     surface << 'め'
