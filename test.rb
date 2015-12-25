@@ -3,6 +3,6 @@ require './change-to-meu-with-natto.rb'
 
 puts "文章を入力するめう"
 #text = gets()
-text = "めうは濡れた"
+text = "めうとにゃんにゃんする"
 puts change_to_meu_with_natto(text)
 

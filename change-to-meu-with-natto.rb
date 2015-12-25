@@ -40,6 +40,11 @@ def change_to_meu_with_natto( text )
     end
   end
 
+  # 最後がめうでない場合はめうを挿入
+  if ! ( surface[surface.size-2] == 'め' && surface[surface.size-1] == 'う' )
+    surface << 'めう'
+  end
+
   # 生成語を文字列に変換
   str = ""
   surface.each do |n|
