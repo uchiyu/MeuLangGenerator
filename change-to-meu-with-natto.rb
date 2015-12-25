@@ -10,6 +10,9 @@ def change_to_meu_with_natto( text )
   puts nm.parse(text)
 
   nm.parse(text) do |n|
+    if n.feature.split(",")[0] == 'BOS/EOS'
+      break
+    end
     surface << n.surface
     feature << n.feature
   end
@@ -18,7 +21,8 @@ def change_to_meu_with_natto( text )
   surface.each_with_index do |word, num|
     # 変換後に助動詞が続く場合は無視
     if isIgnore == true && feature[num].split(",")[0] == '助動詞'
-      surface[num] = ""
+      surface.delete_at[surface.size-1]
+      feature.delete_at[feature.size-1]
       next
     else
       isIgnore = false
@@ -30,20 +34,33 @@ def change_to_meu_with_natto( text )
 
       # 過去形への対応
       if ( surface[num] == 'た' )
-        surface[num] << 'めう'
+        surface << 'め'
+        surface << 'う'
         next
       end
 
       # 語句の書き換え
-      surface[num-1] = feature[num-1].split(",")[6]
-      surface[num] = 'めう'
+      surface[num-1] = feature[num-1].split(",")[6] #動詞を基本形に
+      surface << 'め'
+      surface << 'う'
     end
   end
 
+  puts surface[surface.size]
+
   # 最後がめうでない場合はめうを挿入
-  if ! ( surface[surface.size-2] == 'め' && surface[surface.size-1] == 'う' )
-    surface << 'めう'
+  if feature[feature.size-1].split(",")[0] == '記号'
+    if !( surface[surface.size-3] == 'め' && surface[surface.size-2] == 'う')
+      tmp = surface[surface.size-1]
+      surface[surface.size-1] = 'め'
+      surface[surface.size] = 'う'
+      surface[surface.size+1] = tmp
+    end
+  elsif !( surface[surface.size-2] == 'め' && surface[surface.size-1] == 'う' )
+    surface << 'め'
+    surface << 'う'
   end
+
 
   # 生成語を文字列に変換
   str = ""
