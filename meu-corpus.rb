@@ -4,6 +4,9 @@ def changeToMeu(str)
   str.gsub!(/めうもそうおもう/, 'めうほほうほほふーッ!!')
   str.gsub!(/ふふーん/, 'むきゅきゅーん☆')
   str.gsub!(/ふふん/, 'むきゅきゅん')
+  str.gsub!(/とてもくやしい/, 'ぐぬぬぬぬぬぬぬ')
+  str.gsub!(/驚いて/, 'むっきゅーーんして')
+  str.gsub!(/メリークリスマス/, 'メリクリリン')
   # str.gsub!(//, 'ざぎん')
   # str.gsub!(//, 'ひなち')
   # str.gsub!(//, 'まっくすきゃっほい')
@@ -19,14 +22,8 @@ def changeToMeu(str)
   # str.gsub!(//, 'むきゅーーん')
   # str.gsub!(//, 'れぞぞ')
   # str.gsub!(//, '全宇宙がすたんでぃんぐはなぢレベル')
-  str.gsub!(/とてもくやしい/, 'ぐぬぬぬぬぬぬぬ')
-  str.gsub!(/驚いて/, 'むっきゅーーんして')
-  str.gsub!(/メリークリスマス/, 'メリクリリン')
   # str.gsub!(//, 'あずず')
   # str.gsub!(//, 'おさしみ')
-  # str.gsub!(//, '')
-  # str.gsub!(//, '')
-  # str.gsub!(//, '')
    
   # 単語
   str.gsub!(/おもちゃ/, 'もちゃちゃ')
@@ -170,8 +167,6 @@ def changeToMeu(str)
   str.gsub!(/喧騒/, 'ケンソー')
   str.gsub!(/絶賛/, 'ぜっさん')
   str.gsub!(/乞うご期待/, 'こうごきたい')
-  #str.gsub!(//, '')
-  #str.gsub!(//, '')
 
   # 代名詞
   str.gsub!(/それ/, 'そり')
@@ -191,18 +186,6 @@ def changeToMeu(str)
   str.gsub!(/東雲夏陽|夏陽|なつひ/, 'なつつ')
   str.gsub!(/リリーゼ/, 'りりーぜ')
   str.gsub!(/モード/, 'もーど')
-  # str.gsub!(//, 'たっちん') #春日咲子の父親？
-  # str.gsub!(//, '')
-
-  # 語尾
-  # str.gsub!(/です|ます/, 'めう')
-  if str !~ /(\w*めう|\w*なのだっ)+(。|.|\n)*/
-    
-  end
-  # str.gsub!(//, 'めう？')
-  # str.gsub!(//, 'なり☆')
-  # str.gsub!(//, 'なのだっ')
-  # str.gsub!(//, 'めうっ☆')
 
   return str
 end
