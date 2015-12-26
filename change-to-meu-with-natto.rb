@@ -3,11 +3,12 @@ require 'natto'
 
 def change_to_meu_with_natto( text )
   nm = Natto::MeCab.new #mecab用変数
-  surface = Array.new #分かち書き部分を格納
-  feature = Array.new #品詞情報を格納
-  isIgnore = false
+  surface = [] #分かち書き部分を格納
+  feature = [] #品詞情報を格納
+  is_ignore = false
 
-  puts nm.parse(text)
+  # 形態素解析結果のデバック出力
+  #puts nm.parse(text)
 
   nm.parse(text) do |n|
     if n.feature.split(",")[0] == 'BOS/EOS'
@@ -20,17 +21,17 @@ def change_to_meu_with_natto( text )
   # 動詞、助動詞の並びなら、動詞めうに変換
   for num in 1..surface.size-1
     # 変換後に助動詞が続く場合は無視
-    if isIgnore == true && feature[num].split(",")[0] == '助動詞'
+    if is_ignore == true && feature[num].split(",")[0] == '助動詞'
       surface.delete_at[surface.size-1]
       feature.delete_at[feature.size-1]
       next
     else
-      isIgnore = false
+      is_ignore = false
     end
 
     # 動詞、助動詞の並びの場合
     if feature[num-1].split(",")[0] == '動詞' && feature[num].split(",")[0] == '助動詞'
-      isIgnore = true
+      is_ignore = true
 
       # 過去形への対応
       if ( surface[num] == 'た' )
@@ -45,8 +46,6 @@ def change_to_meu_with_natto( text )
       surface.insert(num+1,  'う')
     end
   end
-
-  puts surface[surface.size]
 
   #最後がめうでない場合はめうを挿入
   if feature[feature.size-1].split(",")[0] == '記号' || surface[surface.size-1] == '!' || surface[surface.size-1] == '!!'
