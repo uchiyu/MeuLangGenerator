@@ -1,4 +1,4 @@
-def changeToMeu(str)
+def meu_corpus(str)
   # 謎
   str.gsub!(/顔が赤くなる/, 'ゆでゆでだこになる')
   str.gsub!(/めうもそうおもう/, 'めうほほうほほふーッ!!')
