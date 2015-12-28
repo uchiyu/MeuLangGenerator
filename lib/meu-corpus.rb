@@ -10,7 +10,6 @@ def meu_corpus(text)
   text.gsub!(/驚いて/, 'むっきゅーーんして')
   text.gsub!(/メリークリスマス/, 'メリクリリン')
   text.gsub!(/銀座|ぎんざ|ギンザ|Ginza/, 'ざぎん')
-  text.gsub!(/何？|何?/, 'んにっ？')
   text.gsub!(/ふふふー/, 'むににー')
   text.gsub!(/おもちゃ/, 'もちゃちゃ')
   text.gsub!(/萌える/, 'もえきゅん')
@@ -45,7 +44,7 @@ def meu_corpus(text)
   text.gsub!(/ザーザー/, 'ざんざん')
   text.gsub!(/沖縄/, 'おっきなわわ')
   text.gsub!(/秘蔵/, 'ひっぞー')
-  1text.gsub!(/ビート/, 'びと')
+  text.gsub!(/ビート/, 'びと')
   
   # 単語
   
