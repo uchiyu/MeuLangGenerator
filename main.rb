@@ -1,6 +1,6 @@
 # encoding: utf-8
-require './change-to-meu-with-natto.rb'
-require './meu-corpus.rb'
+require './lib/change-to-meu-with-natto.rb'
+require './lib/meu-corpus.rb'
 
 puts "文章を入力するめう"
 text = gets()
