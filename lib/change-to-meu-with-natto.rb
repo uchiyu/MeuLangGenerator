@@ -8,7 +8,7 @@ def change_to_meu_with_natto( text )
   is_ignore = false
 
   # 形態素解析結果のデバック出力
-  #puts nm.parse(text)
+  puts nm.parse(text)
 
   nm.parse(text) do |n|
     if n.feature.split(",")[0] == 'BOS/EOS'
@@ -35,29 +35,27 @@ def change_to_meu_with_natto( text )
 
       # 過去形、否定形への対応
       if ( surface[num] == 'た' || surface[num] == 'ない' )
-        surface << 'め'
-        surface << 'う'
+        surface << 'めう'
         next
       end
 
       # 語句の書き換え
       surface[num-1] = feature[num-1].split(",")[6] #動詞を基本形に
-      surface[num] = 'め'
-      surface.insert(num+1,  'う')
+      surface[num] = 'めう'
     end
   end
 
   #最後がめうでない場合はめうを挿入
+  # 記号や!の場合かつ最後がめうじゃなければ挿入
   if feature[feature.size-1].split(",")[0] == '記号' || surface[surface.size-1] == '!' || surface[surface.size-1] == '!!'
-    if !( surface[surface.size-3] == 'め' && surface[surface.size-2] == 'う')
+    if !( surface[surface.size-2] == 'めう')
       tmp = surface[surface.size-1]
-      surface[surface.size-1] = 'め'
-      surface << 'う'
+      surface[surface.size-1] = 'めう'
       surface << tmp
     end
-  elsif !( surface[surface.size-2] == 'め' && surface[surface.size-1] == 'う' )
-    surface << 'め'
-    surface << 'う'
+  # 記号じゃない場合、最後にめうを挿入
+  elsif !( surface[surface.size-1] == 'めう' )
+    surface << 'めう'
   end
 
 
