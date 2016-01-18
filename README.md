@@ -3,6 +3,7 @@
 ## About
 
 入力された文字をひなビタ♪の芽兎めう風に変換するプログラム
+https://github.com/SLP-KBIT/meugene で利用
 
 ## Installation
 
